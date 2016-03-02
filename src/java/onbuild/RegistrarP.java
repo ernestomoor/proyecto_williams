@@ -44,83 +44,144 @@ public class RegistrarP extends HttpServlet {
             out.println("<title>Servlet RegistrarP</title>");
             out.println("</head>");
             out.println("<body>");
-            String nombre = request.getParameter("nom");
-            String app = request.getParameter("app");
-            String apm = request.getParameter("apm");
-            String fecn = request.getParameter("fecn");
-            String esc = request.getParameter("esc");
-            String sex = request.getParameter("sex");
-            String ed = request.getParameter("edad");
-            String lat = request.getParameter("lat");
-            String clave = request.getParameter("cla");
-            String nick = request.getParameter("nick");
-
-            //datos tutor
-            String nomt = request.getParameter("nomt");
-            String appt = request.getParameter("appt");
-            String apmt = request.getParameter("apmt");
-            String calle = request.getParameter("calle");
-            String ne = request.getParameter("ne");
-            String ni = request.getParameter("ni");
-            String col = request.getParameter("col");
-            String cp = request.getParameter("cp");
-            String del = request.getParameter("del");
-            String cd = request.getParameter("cd");
-            String tel = request.getParameter("tel"); 
-            String nickt = request.getParameter("nickt");
-            String clat = request.getParameter("clat");
-
+            
+            
             //info terapeuta
             HttpSession sesion = request.getSession();
-            String nicktera=sesion.getAttribute("nick")+"";
-            
-            int net, nit, cpt, telt;
-            
-            boolean sexb = false;
-            if (sex.equals("Masculino")) {
-                sexb = true;
-            } else {
-                sexb = false;
-            }
-            int edad;
+            String nicktera = sesion.getAttribute("nick") + "";
 
-            try {
-                edad = Integer.parseInt(ed);
-                net = Integer.parseInt(ne);
-            nit = Integer.parseInt(ni);
-            cpt = Integer.parseInt(cp);
-            telt = Integer.parseInt(tel);
-            } catch (Exception x) {
-                edad = 0;
-                net=0;
-                nit=0;
-                cpt=0;
-                telt=0;
-            }
-            int late = 0;
-            if (lat.equals("Zurdo")) {
-                late = 1;
-            } else if (lat.equals("Diestro")) {
-                late = 2;
+           //Variabes del paciente 
+            String nombrePaciente = request.getParameter("nom");
+            String paternoPaciente = request.getParameter("app");
+            String maternoPaciente = request.getParameter("apm");
+            String curpPaciente = request.getParameter("curp_paciente");
+            String fechNacPaciente = request.getParameter("fecn");
+            String escolaridadPaciente = request.getParameter("esc");
+            String sexoPaciente = request.getParameter("sex");
+            String edadPaciente = request.getParameter("edad");
+            String lateralidadPaciente = request.getParameter("lat");
+            String nickPaciente = request.getParameter("nick");
+            String clavePaciente = request.getParameter("cla");
+            String privPaciente = request.getParameter("priv_paciente");
+            //Impresion de las variabes para el paciente
+            System.out.println(nombrePaciente
+                    +"\n"+ paternoPaciente
+                    +"\n"+maternoPaciente
+                    +"\n"+curpPaciente
+                    +"\n"+fechNacPaciente
+                    +"\n"+escolaridadPaciente
+                    +"\n"+sexoPaciente
+                    +"\n"+edadPaciente
+                    +"\n"+lateralidadPaciente
+                    +"\n"+nickPaciente
+                    +"\n"+clavePaciente
+                    +"\n"+privPaciente);
+            
+            //variables del tutor
+            String nombreTutor = request.getParameter("nomt");
+            String paternoTutor = request.getParameter("appt");
+            String maternoTutor = request.getParameter("apmt");
+            String curpTutor = request.getParameter("curp_tutor");
+            String calleTutor = request.getParameter("calle");
+            String numeroExteriorTutor = request.getParameter("ne");
+            String numeroInteriorTutor = request.getParameter("ni");
+            String coloniaTutor = request.getParameter("col");
+            String delegacionTutor = request.getParameter("del");
+            String codigoPostalTutor = request.getParameter("cp");
+            String ciudadTutor = request.getParameter("cd");
+            String telefonoTutor = request.getParameter("tel");
+            String nickTutor = request.getParameter("nickt");
+            String claveTutor = request.getParameter("clat");
+            String privTutor = request.getParameter("priv_tutor");
+           
+            //Impresion de variables del tutor
+            System.out.println( nombreTutor
+                    +"\n"+paternoTutor
+                    +"\n"+maternoTutor
+                    +"\n"+curpTutor
+                    +"\n"+calleTutor
+                    +"\n"+numeroExteriorTutor
+                    +"\n"+numeroInteriorTutor
+                    +"\n"+coloniaTutor
+                    +"\n"+delegacionTutor
+                    +"\n"+codigoPostalTutor
+                    +"\n"+ciudadTutor
+                    +"\n"+telefonoTutor
+                    +"\n"+nickTutor
+                    +"\n"+claveTutor
+                    +"\n"+privTutor);
+            
+            /*Casting de varibles del paciente*/
+            int idSexoPaciente=3; //El valor 3 significa que no esta definido. 
+            int idLateralidad=4; //El valor 4 significa que no esta definido.
+            int edad = Integer.parseInt(edadPaciente);
+            int idPrivPaciente = Integer.parseInt(privPaciente);
+            //Define un Id para el sexo
+            if (sexoPaciente.equals("Masculino")) {
+                idSexoPaciente=1;
             } else {
-                late = 3;
+                idSexoPaciente=2;
+            }
+            //Define un Id para la lateralidad del paciente
+          
+            if (lateralidadPaciente.equals("Zurdo")) {
+                idLateralidad = 1;
+            } else if (lateralidadPaciente.equals("Diestro")) {
+                idLateralidad = 2;
+            } else {
+                idLateralidad = 3;
             }
 
+            
+            /*Casting para las variables del tutor*/
+            
+            int idPrivTutor = Integer.parseInt(privTutor);
+            
+            
             try {
-                System.out.println(nick);
-                System.out.println(nickt);
+                System.out.println(nickPaciente);
+                System.out.println(nickTutor);
                 //Verificamos si el usuario existe antes de registrarloxD
-                if(conex.verificaExiste(nick) || conex.verificaExiste(nickt)){
+                if (conex.verificaExiste(nickPaciente) || conex.verificaExiste(nickTutor)) {
                     //si devuelve falso es porque existe
                     out.println("<script>alert('El usuario no se puede registrar, el usuario ya existe')</script>");
-                }else{
-                conex.registrarU(nombre, app, apm, clave, nick, 3);
-                conex.registrarP(fecn, esc, sexb, edad, late, nick,nicktera);
-                conex.registrarU(nomt, appt, apmt, clat, nickt, 4);
-                conex.registrarT(calle, nickt, net, nit, cpt, del, cd, telt, nick);
-                conex.actualizartera(nick, nicktera);
-                out.println("<script>alert('Paciente y Tutor registrados')</script>");
-                response.sendRedirect("registrarPT.jsp");
+                } else {
+                    //Conexión y metodo para registrar a un paciente
+                    conex.registrarPaciente(nombrePaciente,
+                            paternoPaciente,
+                            maternoPaciente,
+                            curpPaciente,
+                            fechNacPaciente,
+                            escolaridadPaciente,
+                            idSexoPaciente,
+                            edad,
+                            idLateralidad,
+                            nickPaciente,
+                            clavePaciente,
+                            idPrivPaciente);
+                    //conexión y metodo para registrar a un tutor,
+                    
+                    conex.registrarTutor(nombreTutor,
+                    paternoTutor,
+                    maternoTutor,
+                    curpTutor,
+                    calleTutor,
+                    numeroExteriorTutor,
+                    numeroInteriorTutor,
+                    coloniaTutor,
+                    delegacionTutor,
+                    codigoPostalTutor,
+                    ciudadTutor,
+                    telefonoTutor,
+                    nickTutor,
+                    claveTutor,
+                    idPrivTutor);
+                
+               //conexion y metodo para registrar la relación paciente Tutor;
+               conex.registrarRelacionPacienteTutor(curpTutor, curpPaciente);
+              
+                    out.println("<script>alert('Paciente y Tutor registrados')</script>");
+                    response.sendRedirect("registrarPT.jsp");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(RegistrarP.class.getName()).log(Level.SEVERE, null, ex);

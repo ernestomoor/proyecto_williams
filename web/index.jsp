@@ -28,8 +28,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Williams</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        <title>Página de inicio Williams</title>
+        
+      
+        <link rel="stylesheet" href="css/principal.css">
+        
     </head>
     <body>
     <center>
@@ -41,8 +44,8 @@
     <hr style="background-color: #0073CA; height: 20px;">
     <hr style="background-color: #E39F2F; height: 20px; margin: -10px">
 
-
-    <form action="IniciarSesion" method="post">
+<div>
+    <form action="IniciarSesion" method="post" class="col-lg-4 col-lg-offset-3">
         <center>
             <table>
                 <tr>
@@ -56,10 +59,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> <center><input type="text" name="curp" placeholder="Nombre de usuario"/></center></td>
+                    <td> <center><input type="text" name="nick" placeholder="Usuario"/></center></td>
                 </tr>
                 <tr>
-                    <td><center><input type="password" name="pass" placeholder="Paswword"/></center></td>
+                    <td><center><input type="password" name="pass" placeholder="Pasword"/></center></td>
                 </tr>
                 <tr>
                     <td><center><input type="submit" id="boton" value="Iniciar Sesion" /></center></td>
@@ -68,6 +71,7 @@
             </table>
         </center>
     </form>
-
+</div> 
+   
 </body>
 </html>

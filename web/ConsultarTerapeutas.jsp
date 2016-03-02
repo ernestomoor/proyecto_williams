@@ -75,19 +75,45 @@ String priv= sesion.getAttribute("privilegio")+"";
                     A. Materno
                 </td>
                 <td>
-                    Cedula
+                    Cédula
                 </td>
                 <td>
                     Nick
                 </td>
-                
+                <td>
+                    Clave
+                </td>
+                <td>
+                    Lunes
+                </td>
+                <td>
+                    Martes
+                </td>
+                <td>
+                    Miercoles
+                </td>
+                <td>
+                    Jueves
+                </td>
+                <td>
+                    Viernes
+                </td>
+                <td>
+                    Sábado
+                </td>
+                <td>
+                    Domingo
+                </td>
+                <td>
+                    Privilegios
+                </td>
             </tr>
         <%
         PreparedStatement ps;
         ResultSet rs;
         Acceso ac=new Acceso();
         
-        ps=ac.iniCon().prepareStatement("SELECT * FROM usuario NATURAL JOIN terapeuta");
+        ps=ac.iniCon().prepareStatement("SELECT * FROM terapeuta");
         rs=ps.executeQuery();
         while(rs.next()){
         %>
@@ -99,7 +125,7 @@ String priv= sesion.getAttribute("privilegio")+"";
                     <% out.print(rs.getString("App")); %>
                 </td>
                 <td>
-                    <% out.print(rs.getString("Apm")); %>o
+                    <% out.print(rs.getString("Apm")); %>
                 </td>
                 <td>
                     <% out.print(rs.getString("Cedula")); %>
@@ -107,7 +133,33 @@ String priv= sesion.getAttribute("privilegio")+"";
                 <td>
                     <% out.print(rs.getString("Nick")); %>
                 </td>
-                
+                <td>
+                    <% out.print(rs.getString("Clave")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HLun")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HMar")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HMie")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HJue")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HVie")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HSab")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("HDom")); %>
+                </td>
+                <td>
+                    <% out.print(rs.getString("Id_priv")); %>
+                </td>
             </tr>
         <% } %>
         </table>

@@ -46,6 +46,7 @@ String priv= sesion.getAttribute("privilegio")+"";
                         <tr>
                             <td>
                                 <form action="CerrarSesion" method="post">
+                                <input type="button" value="Agenda" onclick="window.location.href = 'Agenda.jsp'" id="boton"/>
                                 <input type="button" value="Registrar Paciente y Tutor" onclick="window.location.href = 'registrarPT.jsp'" id="boton"/>
                                 <input type="button" value="Modificar Tutor" onclick="window.location.href = 'ModificarTut.jsp'" id="boton"/>
                                 <input type="button" value="solicitudes de citas" onclick="window.location.href = 'ResponderCitas.jsp'" id="boton"/>
@@ -62,11 +63,13 @@ String priv= sesion.getAttribute("privilegio")+"";
                 </center>
             </div>
     </center>
+    <p>Registro del paciente</p>
         <form action="RegistrarP" name="" method="post">
             <input type="text" name="nom" placeholder="Nombre"/><br>
             <input type="text" name="app" placeholder="Apellido Paterno"/><br>
             <input type="text" name="apm" placeholder="Apellido Materno"/><br>
-            <input type="date" name="fecn" min="1980-01-01" max="2011-12-31" /><br>
+            <input type="text" name="curp_paciente" placeholder="CURP"/><br>
+            Fecha de naciemiento:<input type="date" name="fecn" min="1980-01-01" max="2011-12-31" /><br>
             <input type="text" name="esc" placeholder="Escolaridad"/><br>
             <br>Sexo: Masculino:<input type="radio" value="Masculino" name="sex"/> &nbsp;
              Femenino:<input type="radio" value="Femenino" name="sex"/><br>
@@ -74,23 +77,26 @@ String priv= sesion.getAttribute("privilegio")+"";
             <br>Lateralidad:<br> Zurdo<input type="radio" value="Zurdo" name="lat"/>
              Diestro<input type="radio" value="Diestro" name="lat"/>
              Ambidiestro<input type="radio" value="Ambidiestro" name="lat"/><br>
-            <input type="password" name="cla" placeholder="Clave"/><br>
             <input type="text" name="nick" placeholder="Nickname"/><br>
+            <input type="password" name="cla" placeholder="Clave"/><br>
+            <input type="hidden" name="priv_paciente" value="3"/>
             <hr/>
             Tutor:<br>
             <input type="text" name="nomt" placeholder="Nombre tutor"/><br>
             <input type="text" name="appt" placeholder="Apellido paterno tutor"/><br>
             <input type="text" name="apmt" placeholder="Apellido materno tutor"/><br>
+            <input type="text" name="curp_tutor" placeholder="CURP"/><br>
             <input type="text" name="calle" placeholder="calle"/><br>
             <input type="text" name="ne" placeholder="numero exterior"/><br>
             <input type="text" name="ni" placeholder="numero interior"/><br>
             <input type="text" name="col" placeholder="colonia"/><br>
-            <input type="text" name="cp" placeholder="codigo postal"/><br>
             <input type="text" name="del" placeholder="delegacion"/><br>
+            <input type="text" name="cp" placeholder="codigo postal"/><br>
             <input type="text" name="cd" placeholder="ciudad"/><br>
             <input type="tel" name="tel" placeholder="telefono"/><br>
             <input type="text" name="nickt" placeholder="Nickname"/><br>
             <input type="password" name="clat" placeholder="Clave Tutor"/><br>
+            <input type="hidden" name="priv_tutor" value="4"/>
             <input type="submit" value="Registrar" id="boton"/>
             
         </form>

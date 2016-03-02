@@ -41,34 +41,72 @@ public class RegistrarTe extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            
+            String nombre = request.getParameter("ter_nombre");
+            String app = request.getParameter("ter_paterno");
+            String apm = request.getParameter("ter_materno");
+            String cedula = request.getParameter("ter_cedula");
+            String nick = request.getParameter("ter_nick");
+            String clave = request.getParameter("ter_clave");
+            String hlunes = request.getParameter("hlun");
+            String hmartes = request.getParameter("hmar");
+            String hmiercoles = request.getParameter("hmie");
+            String hjueves = request.getParameter("hjue");
+            String hviernes = request.getParameter("hvie");
+            String hsabado = request.getParameter("hsab");
+            String hdomingo = request.getParameter("hdom");
+            String privilegio = request.getParameter("ter_privilegio");
+            
+            //Casting de variables para el terapeuta
+            int ter_privilegio=Integer.parseInt(privilegio);
+            
             out.println("<title>Servlet RegistrarTe</title>");            
             out.println("</head>");
-            out.println("<body>");
+            out.println("<body> Estamos en el servlet RegistraTe, parametros recibidos:");
+            out.println(nombre+","
+                    +app+","
+                    +apm+","
+                    +cedula+","
+                    +nick+","
+                    +clave+","
+                    +hlunes+","
+                    +hmartes+","
+                    +hmiercoles+","
+                    +hjueves+","
+                    +hviernes+","
+                    +hsabado+","
+                    +hdomingo+","
+                    +ter_privilegio);
             
-            String nombre = request.getParameter("nomte");
-            String app = request.getParameter("appte");
-            String apm = request.getParameter("apmte");
-            String cedula = request.getParameter("cedu");
-            String clave = request.getParameter("clate");
-            String nick = request.getParameter("nickte");
-            
-          
-            System.out.println(nick);
              try {
-                if(!conex.verificaExiste(nick)){
-                conex.registrarU(nombre, app, apm, clave, nick, 2);
-                conex.registrarTe(cedula, nick);
-                out.println("<script>alert('Terapeuta Registrado')</script>");
+            if(!conex.verificaExiste(nick)){
+                conex.registrarTerapeuta(nombre, app, apm, cedula, nick, clave, hlunes, hmartes, hmiercoles, hjueves, hviernes, hsabado, hdomingo, ter_privilegio);
+                System.out.println("Se ha registrado un usuario");
+                //conex.registrarTe(cedula, nick);
+                out.println("<script>alert('Se ha registrado el terapeuta')</script>");
+            }   else{ 
+                out.println("<script>alert('Ya existe un usuario registrado con el mismo nombre de usuario')</script>");
+                response.sendRedirect("admin.jsp");
+            }
+             }catch(SQLException ex){
+                //Logger.getLogger(RegistrarP.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("El error es:" + ex.getMessage());
+                out.println("El usuario no se registro");
+         }
+            
+           
+          /*
+            
+            
+                
                 
                 response.sendRedirect("admin.jsp");
                 }else{
                     out.println("El terapeuta ya esta registrado");
                 }
-         }catch(SQLException ex){
-                Logger.getLogger(RegistrarP.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("El error es:" + ex.getMessage());
-                out.println("El usuario no se registro");
-         }
+         
+             
+             */
             out.println("</body>");
             out.println("</html>");
         }

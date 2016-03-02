@@ -31,7 +31,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Págima del tutor</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -56,12 +56,13 @@
         </div>
         <h1>Tutor: <% out.println(sesion.getAttribute("usuario")); %></h1>
         <%
+            
+            /*
             System.out.println(nick);
             Acceso paciente = new Acceso();
             ResultSet rs;
             String rela = "";
-            PreparedStatement ps
-                    = paciente.iniCon().prepareStatement("select * from tutor where Nick=?");
+            PreparedStatement ps = paciente.iniCon().prepareStatement("select * from tutor where Nick=?");
             ps.setString(1, nick);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -73,6 +74,8 @@
             ps.setString(1, rela);
             rs = ps.executeQuery();
             while (rs.next()) {
+
+*/
         %>
         <%
             out.print("Datos del Paciente:");
@@ -81,72 +84,53 @@
 
             <tr>
                 <td>
-                    <% out.println("Nombre: " + rs.getString("Nombre"));  %>
+                    <%//out.println("Nombre: " + rs.getString("Nombre"));  %>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <%out.println("Apellido Paterno: " + rs.getString("App")); %>
+                    <%//out.println("Apellido Paterno: " + rs.getString("App")); %>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <% out.println("Apellido Materno: " + rs.getString("Apm")); %>
+                    <%// out.println("Apellido Materno: " + rs.getString("Apm")); %>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <% out.println("Apellido Materno: " + rs.getString("Nick")); %>
+                    <%// out.println("Apellido Materno: " + rs.getString("Nick")); %>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <% out.println("Edad: " + rs.getInt("Edad"));  %>
+                    <%// out.println("Edad: " + rs.getInt("Edad"));  %>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <% if (rs.getBoolean("Sexo")) {
-                            out.println("Sexo: Masculino");
-                        } else {
-                            out.print("Sexo: Femenino");
-                                } %>
+                    Sexo
                 </td>
             </tr>
             <tr>
                 <td>
-                    <%
-                        out.println("Fecha de Nacimiento: " + rs.getString("FNac"));
-                    %>
+                    Nacimiento
                 </td>
             </tr>
             <tr>
                 <td>
-                    <%
-                        out.println("Escolaridad: " + rs.getString("Escolaridad"));
-                    %>
+                    escolaridad
                 </td>
             </tr>
             <tr>
                 <td>
-                    <% if (rs.getInt("Lateralidad") == 1) {
-                            out.println("Lateralidad: Zurdo");
-                        } else if (rs.getInt("Lateralidad") == 2) {
-                            out.println("Lateralidad: Diestro");
-                        } else {
-                            out.println("Lateralidad: Ambidiestro");
-
-                                } %>
+                    Lateralidad
                 </td>
             </tr>
 
         </table>
 
-        <%
-            }
-            paciente.iniCon().close();
-
-        %>
+        
 
 
     </center>

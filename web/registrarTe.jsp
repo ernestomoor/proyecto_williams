@@ -62,13 +62,21 @@
         <br>
         <form action="RegistrarTe" name="" method="post">
 
-            <input type="text" name="nomte" placeholder="Nombre"/><br>
-            <input type="text" name="appte" placeholder="Apellido Paterno"/><br>
-            <input type="text" name="apmte" placeholder="Apellido Materno"/><br>
-            <input type="text" name="cedu" placeholder="Cedula Prof"/><br>
-            <input type="password" name="clate" placeholder="Clave"/><br>
-            <input type="text" name="nickte" placeholder="Nickname"/><br>
-
+            <input type="text" name="ter_nombre" placeholder="Nombre"/><br>
+            <input type="text" name="ter_paterno" placeholder="Apellido Paterno"/><br>
+            <input type="text" name="ter_materno" placeholder="Apellido Materno"/><br>
+            <input type="text" name="ter_cedula" placeholder="Cedula Prof"/><br>
+            <input type="text" name="ter_nick" placeholder="Nickname"/><br>
+            <input type="password" name="ter_clave" placeholder="Contraseña"/><br>
+            <p>Horario</p>
+            Lunes: <input type="text" name="hlun" placeholder="00:00-00:00"/><br>
+            Martes: <input type="text" name="hmar" placeholder="00:00-00:00"/><br>
+            Miercoles: <input type="text" name="hmie" placeholder="00:00-00:00"/><br>
+            Jueves: <input type="text" name="hjue" placeholder="00:00-00:00"/><br>
+            Viernes: <input type="text" name="hvie" placeholder="00:00-00:00"/><br>
+            Sábado: <input type="text" name="hsab" placeholder="00:00-00:00"/><br>
+            Domingo: <input type="text" name="hdom" placeholder="00:00-00:00"/><br>
+            <input type="hidden" value="2" name="ter_privilegio"/>
             <input type="submit" value="Registrar Terapeuta"  id="boton" /><br>
         </form>
         

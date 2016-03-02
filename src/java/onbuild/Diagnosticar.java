@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,24 +38,35 @@ public class Diagnosticar extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            response.sendRedirect("terapeuta.jsp");
-            Acceso ac=new Acceso();
-            PreparedStatement ps;
-            ResultSet rs;
-            Validaciones val = new Validaciones();
-            String estudios=request.getParameter("estudios");
-            String Diagnosticos=request.getParameter("diagnosticos");
-            String observaciones=request.getParameter("observaciones");
-            String np=request.getParameter("np");
-            if(val.lmaxima(45, np) && val.lmaxima(1100, estudios) && val.lmaxima(1100, observaciones) && val.lmaxima(1100, Diagnosticos)){
-                //if(val.LetNum(np) &&  val.LetNum(estudios) &&  val.LetNum(Diagnosticos) &&  val.LetNum(observaciones)){
-                    ac.Receta(estudios, Diagnosticos, observaciones, np);
-                   
-                
-            } else{
-                System.out.println("datos chafas longitud");
+
+            //Recibimos los parametros de Diagnosticar.jsp
+            String curpPaciente = request.getParameter("curp_paciente");
+            String estudios = request.getParameter("estudios");
+            String diagnosticos = request.getParameter("diagnosticos");
+            String observaciones = request.getParameter("observaciones");
+
+            //Se crea el obeto para hacer conección a la base de datos      
+            Acceso conexion = new Acceso();
+            String mensaje;
+            try {
+                //Se invoca al metodo para hacer un registro
+                boolean registroRealizado;
+                registroRealizado = conexion.registrarEnExpediente(curpPaciente, estudios, diagnosticos, observaciones);
+
+                //Condición si se encuentra información
+                if (registroRealizado == true) {
+                    response.sendRedirect("Diagnosticar.jsp");
+                } else {
+                    mensaje="Verifica que la información sea correcta";
+                    response.sendRedirect("Error.jsp?mensaje="+mensaje);
+                }
+                //Condición si no se encuentra información
+            } catch (SQLException ex) {
+                Logger.getLogger(Diagnosticar.class.getName()).log(Level.SEVERE, null, ex); 
             }
+
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

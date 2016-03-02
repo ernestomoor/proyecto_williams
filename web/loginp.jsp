@@ -56,10 +56,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td> <center><input type="text" name="curp" placeholder="Nombre de usuario"/></center></td>
+                    <td> <center><input type="text" name="nick" placeholder="usuario"/></center></td>
                 </tr>
                 <tr>
-                    <td><center><input type="password" name="pass" placeholder="Paswword"/></center></td>
+                    <td><center><input type="password" name="pass" placeholder="contraseña"/></center></td>
                 </tr>
                 <tr>
                     <td><center><input type="submit" id="boton" value="Iniciar Sesion" /></center></td>

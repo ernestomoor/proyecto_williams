@@ -9,24 +9,24 @@
 <%@page import="java.sql.Statement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="onbuild.Acceso" %>
-<%HttpSession sesion=request.getSession();
-String nom= sesion.getAttribute("usuario")+"";
-String priv= sesion.getAttribute("privilegio")+"";
-                  
-                   if(priv.equals("3")){
-                       response.sendRedirect("paciente.jsp");
-                   
-                   }else if(priv.equals("4")){
-                       response.sendRedirect("tutor.jsp");
-                   
-                   }else if(priv.equals("2")){
-                       response.sendRedirect("terapeuta.jsp");
-                   }else if(priv.equals("1")){
-                       
-                   }else{
-                       response.sendRedirect("loginp.jsp");
-                   }
-               
+<%HttpSession sesion = request.getSession();
+    String nom = sesion.getAttribute("usuario") + "";
+    String priv = sesion.getAttribute("privilegio") + "";
+
+    if (priv.equals("3")) {
+        response.sendRedirect("paciente.jsp");
+
+    } else if (priv.equals("4")) {
+        response.sendRedirect("tutor.jsp");
+
+    } else if (priv.equals("2")) {
+        response.sendRedirect("terapeuta.jsp");
+    } else if (priv.equals("1")) {
+
+    } else {
+        response.sendRedirect("loginp.jsp");
+    }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,7 @@ String priv= sesion.getAttribute("privilegio")+"";
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <center>
+    <center>
         <header id="fondo_superior">
             <center><img src="css/logo.png" id="logo"/></center>
 
@@ -57,52 +57,50 @@ String priv= sesion.getAttribute("privilegio")+"";
                 </table>
             </center>
         </div>
-            <br>
+        <br>
         <br>
         <br>
         <br>
         Administrador: <% out.println(sesion.getAttribute("usuario"));%>
-        
-        <form action="adiostera" name="forma">
+
+        <form action="EliminarTerapeuta" name="forma">
             <br>
-        <br>
+            <br>
             <select name="muere" id="seleccion">
-            <%
-                Acceso eliminar = new Acceso();
-                
-                
-                
-                
-                Statement s;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
-    int tera=0;
-    String nick[];
-    ps = eliminar.iniCon().prepareStatement("SELECT * FROM Usuario natural join Terapeuta where tipoUsu=2");
-    rs = ps.executeQuery();
-    
-    while (rs.next()){ %>
-    
-    <option><% out.print(rs.getString("Nick")); %></option>
-            
-            
-            
-            <% } %>
+                <%
+                    Acceso eliminar = new Acceso();
+
+                    Statement s;
+                    PreparedStatement ps = null;
+                    ResultSet rs = null;
+                    int tera = 0;
+                    String nick[];
+                    //ps = eliminar.iniCon().prepareStatement("SELECT * FROM Usuario natural join Terapeuta where tipoUsu=2");
+                    ps = eliminar.iniCon().prepareStatement("SELECT * FROM terapeuta");
+                    rs = ps.executeQuery();
+
+                while (rs.next()) { %>
+
+                <option><% out.print(rs.getString("Nick")); %></option>
+
+
+
+                <% } %>
             </select>
             <br/>
-            
-                <p>
-            <%
-    ps = eliminar.iniCon().prepareStatement("SELECT * FROM Usuario natural join Terapeuta where tipoUsu=2");
-    rs = ps.executeQuery();
-            while(rs.next()){
-            %>
-            <% out.print(rs.getString("Nick")); %> | <% out.print(rs.getString("Nombre")); %> | <% out.print(rs.getString("App")); %> | <% out.print(rs.getString("Apm")); %> | <% out.print(rs.getString("Cedula")); %><br>
-            
-            <% } %></p>
-                <input type="submit" value="Eliminar terapeuta seleccionado"  id="boton">
+
+            <p>
+                <%
+                    ps = eliminar.iniCon().prepareStatement("SELECT * FROM Usuario natural join Terapeuta where tipoUsu=2");
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                %>
+                <% out.print(rs.getString("Nick")); %> | <% out.print(rs.getString("Nombre")); %> | <% out.print(rs.getString("App")); %> | <% out.print(rs.getString("Apm")); %> | <% out.print(rs.getString("Cedula")); %><br>
+
+                <% }%></p>
+            <input type="submit" value="Eliminar terapeuta seleccionado"  id="boton">
         </form>
-            
-        </center>
-    </body>
+
+    </center>
+</body>
 </html>

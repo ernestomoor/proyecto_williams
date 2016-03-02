@@ -34,6 +34,29 @@ String nickt=sesion.getAttribute("nick")+"";
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Expediente</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+        
+        <style type="text/css">
+            
+            #contenedorR{
+                margin: 0 auto;
+                width: 1000px;
+            }
+            #paciente{
+                float:left;
+                width:300px;
+        
+            }
+            #resultados{
+                float:left;
+                width: 300px;
+         
+            }
+            #diagnostico{
+                float: left;
+                width: 300px;
+          
+            }
+        </style>
     </head>
     <body>
         <center>
@@ -62,62 +85,80 @@ String nickt=sesion.getAttribute("nick")+"";
             </div>
             <br>
             <br>
-            Expediente de paciente:
             
-                <%
-                   Acceso ac=new Acceso();
-                   PreparedStatement ps;
-                   ResultSet rs;
-                   String rel="";
-                   ps=ac.iniCon().prepareStatement("select * from terapeuta where nick=?");
-                   ps.setString(1, nickt);
-                   rs=ps.executeQuery();
-                   while(rs.next()){
-                       rel=rs.getString("RP");
-                   }
-                   ac.iniCon().close();
-                   ps=ac.iniCon().prepareStatement("select * from sesiont where NP=?");
-                   ps.setString(1, rel);
-                   rs=ps.executeQuery();
-                   while(rs.next()){
-                       %>
-                       <table>
-                           
-                       <tr>
-                           <td>
-                               <% out.print("Estudios: "+rs.getString("Estudios")); %>
-                           </td>
-                       </tr>
-                       <tr>
-                           <td>
-                               <% out.print("Diagnosticos: "+rs.getString("Diagnosticos")); %>
-                           </td>
-                       </tr>
-                       <tr>
-                           <td>
-                               <% out.print("Observacones:"+rs.getString("Observaciones")); %>
-                           </td>
-                       </tr>
-                       <tr>
-                           <td>
-                               <% out.print("Folio: "+rs.getInt("idSest")); %>
-                           </td>
-                       </tr>
-                       <tr>
-                           <td>
-                               <% out.print("Paciente: "+rs.getString("NP")); %>
-                           </td>
-                       </tr>
-                       </table>
-                
-                <%
-                       
-                   }
-                   ac.iniCon().close();
-                %>
-                
-                
+            <h1>Consulta un expediente</h1>
+        <%
+            //Declaración de variables
+            String curpPaciente=request.getParameter("curpPaciente");
+            String estudios;
+            String diagnostico;
+            String observaciones;
+           
+        %>
+        
+        <%
+            //Pedimos CURP paciente para consultar
+        %>
+        <form name="consultarExp" action="Expediente.jsp" method="get">
+            CURP del paciente: <input type="text" name="curpPaciente" placeholder="CURP del Paciente">
+            <input type="submit" value="Consultar"/>
+         </form>   
+        <%
+            /**********************************************************
+             * Consulta del Expediente del paciente 
+             * (se guarda en un array para mostrarlo mas adelante)
+             **********************************************************/ 
+             
+            Acceso conex=new Acceso();
+            String expediente[]=conex.consultarExpediente(curpPaciente);
             
+            //Asignamos lo obtenido a las variables
+            estudios=expediente[0];
+            diagnostico=expediente[1];
+            observaciones=expediente[2];
+            
+            /**********************************************************
+             * Consulta los datos del paciente 
+             * (se guarda en un array para mostrarlo mas adelante)
+             **********************************************************/ 
+
+             String paciente[]=conex.consultarPacientePorCurp(curpPaciente);
+             String nombrePaciente=paciente[0];
+             String paternoPaciente=paciente[1];
+             String maternoPaciente=paciente[2];
+             curpPaciente=paciente[3];
+             String FNacPaciente=paciente[4];
+             String escolaridadPaciente=paciente[5];
+             String sexoPaciente=paciente[6];
+             String edadPaciente=paciente[7];
+             String lateralidadPaciente=paciente[8];
+             
+//Continuar
+
+        %>  
+           
+        
+        <%//Mostramos imfrmacion%>        
+        
+        <div id="contenedorR">
+        <div id="paciente">
+            <h2>Datos del paciente</h2>
+        </div>    
+        
+        <div id="resultados">
+            <h2>Resultados de las pruebas</h2>
+        </div>    
+       
+        <div id="diagnostico">
+        <h2>Diagnostico</h2>
+        <h3>Estudios </h3>
+        <p><%=estudios%></p>
+        <h3>Diagnostico </h3>
+        <p><%=diagnostico%></p>
+        <h3>Observaciones</h3>
+        <p><%=observaciones%></p>    
+        </div>        
+        </div>
            
     </center>
     </body>

@@ -28,7 +28,7 @@ String priv= sesion.getAttribute("privilegio")+"";
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Diagnosticar</title>
         <link href="css/principal.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -41,7 +41,7 @@ String priv= sesion.getAttribute("privilegio")+"";
                 <center>
                     <table>
                         <tr>
-                            <td>
+                             <td>
                                 <form action="CerrarSesion" method="post">
                                 <input type="button" value="Registrar Paciente y Tutor" onclick="window.location.href = 'registrarPT.jsp'" id="boton"/>
                                 <input type="button" value="Modificar Tutor" onclick="window.location.href = 'ModificarTut.jsp'" id="boton"/>
@@ -56,13 +56,14 @@ String priv= sesion.getAttribute("privilegio")+"";
                     </table>
                 </center>
             </div>
+            
             <br>
             <br>
             <form method="post" action="Diagnosticar">
-            <input type="text" name="estudios" placeholder="Estudios" maxlength="1100"><br>
-            <input type="text" name="diagnosticos" placeholder="Diagnosticos" maxlength="1100"><br>
-            <input type="text" name="observaciones" placeholder="Observaciones" maxlength="1100"><br>
-            <input type="text" name="np" placeholder="Nick del Paciente" maxlength="45"><br>
+            Curp del paciente:<input type="text" name="curp_paciente" placeholder="CURP del Paciente" maxlength="45"><br>  
+            Estudios: <textarea cols="60" rows="6" name="estudios"> </textarea><br>
+            Diagnistico:<textarea cols="60" rows="6" name="diagnosticos"> </textarea><br>
+            Observaciones:<textarea cols="60" rows="6" name="observaciones"> </textarea><br>
             <input type="submit" value="Enviar" id="boton">
             </form>
     </center>
