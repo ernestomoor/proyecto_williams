@@ -145,7 +145,7 @@ public class Acceso {
 
  
     public String[] consultarPacientePorCurp(String unCurp) throws SQLException {
-        consulta = new String[14];
+        consulta = new String[12];
         try {
             ps = iniCon().prepareStatement("SELECT Nombre, App, Apm, Curp_paciente, Fnac, Escolaridad, Sexo, Edad, Lateralidad, Nick, Clave, Id_priv  FROM  paciente WHERE Curp_Paciente=?");
             ps.setString(1, unCurp);
@@ -154,7 +154,7 @@ public class Acceso {
                 consulta[0] = rs.getString("Nombre");
                 consulta[1] = rs.getString("App");
                 consulta[2]=  rs.getString("Apm");
-                consulta[3] = rs.getString("CurpPaciente");
+                consulta[3] = rs.getString("Curp_Paciente");
                 consulta[4] = rs.getString("Fnac");
                 consulta[5]=  rs.getString("Escolaridad");
                 consulta[6] = rs.getString("Sexo");
@@ -175,6 +175,37 @@ public class Acceso {
         return consulta;
     }
     
+    public String[] consultarTerapeutaPorCedula(String unCedula) throws SQLException {
+        consulta = new String[14];
+        try {
+            ps = iniCon().prepareStatement("SELECT Nombre, App, Apm, Cedula, Nick, Clave, HLun, HMar, HMie, HJue, HVie, HSab, HDom, Id_priv  FROM  terapeuta WHERE Cedula=?");
+            ps.setString(1, unCedula);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                consulta[0] = rs.getString("Nombre");
+                consulta[1] = rs.getString("App");
+                consulta[2]=  rs.getString("Apm");
+                consulta[3] = rs.getString("Cedula");
+                consulta[4] = rs.getString("Nick");
+                consulta[5]=  rs.getString("Clave");
+                consulta[6] = rs.getString("HLun");
+                consulta[7] = rs.getString("HMar");
+                consulta[8]=  rs.getString("HMie");
+                consulta[9] = rs.getString("HJue");
+                consulta[10] = rs.getString("HVie");
+                consulta[11]=  rs.getString("HSab");
+                consulta[12] = rs.getString("HDom");
+                consulta[13]=  rs.getString("Id_priv");
+            }
+            iniCon().close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+            System.out.println(ex.getMessage());
+        }
+        return consulta;
+    } 
     
     
     public String[] consultarDatosTerapeuta(String unNick) throws SQLException {
@@ -357,6 +388,24 @@ public class Acceso {
     
     }
 
+    public void registrarRelacionTerapeutaPaciente(String cedula, String curpPaciente)throws SQLException {
+    
+        try {
+            String insertarRelacionTP = "INSERT INTO terapeuta_paciente(cedula, Curp_paciente) VALUES(?,?);";
+            ps = iniCon().prepareStatement(insertarRelacionTP);
+            ps.setString(1, cedula);
+            ps.setString(2, curpPaciente);
+            ps.executeUpdate();
+            System.out.println("La relación Terapeuta Paciente se registro exitosamente ");
+        } catch (SQLException ex) {
+            Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            iniCon().close();
+        }
+        
+    }
+    
+    
     public void registrarSesion(String unaCedula, String unCurpPaciente, String unaFecha, String unaHora, int noSesion, String unaObservacion)throws SQLException {
         try {
             String insertarSes = "INSERT INTO sesiones(Cedula, Curp_paciente,Fecha, Hora, No_sesion, Observaciones) VALUES(?,?,?,?,?,?);";
@@ -473,13 +522,36 @@ public class Acceso {
         }
 
     }
-    public void actualizartera(String nickp, String nickt) throws SQLException {
+    
+    public void actualizarExpediente(String unEstudio, String unDiagnostico, String unaObservacion, String unCurp)throws SQLException {
+       try { 
+        String actualizarE = "UPDATE expediente SET Estudios=?, Diagnosticos=?, Observaciones=? WHERE Curp=?;";
+        ps=iniCon().prepareStatement(actualizarE);
+        ps.setString(1,unEstudio);
+        ps.setString(2,unDiagnostico);
+        ps.setString(3,unaObservacion);
+        ps.setString(4,unCurp);
+        ps.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("No se realizo la Actualización del expediente");
+            Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            iniCon().close();
+        }
+        
+    }
+    
+    public void actualizarHorario(String lunes, String martes, String miercoles, String jueves, String viernes, String sabado, String cedula) throws SQLException {
         try {
-            String insertarP = "UPDATE Terapeuta SET RP=? WHERE Nick=?;";
+            String insertarP = "UPDATE terapeuta SET Hlun=?, Hmar=?, Hmie=?, Hjue=?, Hvie=?, Hsab=? WHERE Cedula=?;";
             ps = iniCon().prepareStatement(insertarP);
-            ps.setString(1, nickp);
-            ps.setString(2, nickt);
-            
+            ps.setString(1, lunes);
+            ps.setString(2, martes);
+            ps.setString(3, miercoles);
+            ps.setString(4, jueves);
+            ps.setString(5, viernes);
+            ps.setString(6, sabado);
+            ps.setString(7, cedula);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(Acceso.class.getName()).log(Level.SEVERE, null, ex);
@@ -551,7 +623,8 @@ public class Acceso {
         }
 
     }
-
+    
+    
     public void modificarDatosPa(String nick,String nnick,  String nombre, String app, String apm, String clave,String fecn, String esc, boolean sex, int ed, int lat) {
         String actualizarU = "UPDATE Usuario SET Clave=?, Nombre=?, App=?, Apm=?, Nick=? WHERE Nick=?";
         try {
@@ -676,6 +749,8 @@ public class Acceso {
         ac.modificarDatosTut("sdfghj", "tutorp1","tutorp2", 43, 12, 12, "ss", "neza", 551335166, "paciente2", "juan", "perex", "yoda", "xd");
         ac.modificarDatosTera("godas", "tepeutaM0xAAaa", "Mellisa", "clarke", "suicide", "EzaMel","XXX");
     }
+
+    
     
 
 }

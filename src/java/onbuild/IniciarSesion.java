@@ -69,7 +69,7 @@ public class IniciarSesion extends HttpServlet {
                     sesion.setAttribute("usuario", terapeuta[1]);
                     sesion.setAttribute("pass", terapeuta[2]);
                     sesion.setAttribute("privilegio", terapeuta[3]);
-                    response.sendRedirect("terapeuta.jsp");
+                    response.sendRedirect("terapeuta.jsp?cedula="+terapeuta[0]);
                 }
                 
                 /*Si en paciente hay algo diferente a null, sesion para paciente */
@@ -91,7 +91,7 @@ public class IniciarSesion extends HttpServlet {
                     sesion.setAttribute("usuario", administrador[0]);
                     sesion.setAttribute("pass", administrador[1]);
                     sesion.setAttribute("privilegio", administrador[2]);
-                    response.sendRedirect("admin.jsp");
+                    response.sendRedirect("InicioAdministrador.jsp");
 
                 } 
                 

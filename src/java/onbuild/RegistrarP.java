@@ -49,6 +49,7 @@ public class RegistrarP extends HttpServlet {
             //info terapeuta
             HttpSession sesion = request.getSession();
             String nicktera = sesion.getAttribute("nick") + "";
+            String cedula=request.getParameter("cedula");
 
            //Variabes del paciente 
             String nombrePaciente = request.getParameter("nom");
@@ -177,8 +178,14 @@ public class RegistrarP extends HttpServlet {
                     claveTutor,
                     idPrivTutor);
                 
-               //conexion y metodo para registrar la relación paciente Tutor;
+               //conexion y metodo para registrar la relación Tutor Paciente;
                conex.registrarRelacionPacienteTutor(curpTutor, curpPaciente);
+               
+               //conexión y metodo para registrar la relacion Terapeuta Paciente
+               conex.registrarRelacionTerapeutaPaciente(cedula, curpPaciente);
+               
+               //conexión y metodo para registrar un expeiente en blanco.
+               conex.registrarEnExpediente(curpPaciente,"vacio","vacio","vacio");
               
                     out.println("<script>alert('Paciente y Tutor registrados')</script>");
                     response.sendRedirect("registrarPT.jsp");

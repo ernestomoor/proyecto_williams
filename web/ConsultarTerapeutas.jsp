@@ -47,8 +47,8 @@ String priv= sesion.getAttribute("privilegio")+"";
                         <td>
                             <form action="CerrarSesion" method="post">
                                 <input type="button" value="Registrar Terapeuta" onclick="window.location.href = 'registrarTe.jsp'" id="boton"/>
-                                <input type="button" value="Eliminar Terapeuta" onclick="window.location.href = 'eliminarTe.jsp'" id="boton"/>
-                                <input type="button" value="Consultar Terapeutas" onclick="location.href = 'ConsultarTerapeutas.jsp'" id="boton"/>
+                                <input type="button" value="Consultar Terapeutas" onclick="location.href = 'ConsultarTerapeutas.jsp'" id="boton"/>                 
+                                <input type="button" value="Inicio" onclick="window.location.href = 'InicioAdministrador.jsp'" id="boton"/>                               
                                 <input type="submit" value="Cerrar Sesion" id="boton">
                             </form>
                         </td>
@@ -63,6 +63,7 @@ String priv= sesion.getAttribute("privilegio")+"";
         Administrador: <% out.println(sesion.getAttribute("usuario"));%>
         <br>
         <br>
+        <h3> Da click en la cédula del terapeuta para ver los detalles</h3>
         <table>
             <tr id="tabla">
                 <td>
@@ -128,7 +129,7 @@ String priv= sesion.getAttribute("privilegio")+"";
                     <% out.print(rs.getString("Apm")); %>
                 </td>
                 <td>
-                    <% out.print(rs.getString("Cedula")); %>
+                    <a href="DetallesTerapeuta.jsp?cedula=<%=rs.getString("cedula")%>"</a><%out.print(rs.getString("cedula")); %>
                 </td>
                 <td>
                     <% out.print(rs.getString("Nick")); %>

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Alumno
@@ -31,8 +30,8 @@ public class RegistrarTe extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    Acceso conex = new Acceso();
-    
+    Acceso conex = new Acceso();    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,7 +40,7 @@ public class RegistrarTe extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            
+
             String nombre = request.getParameter("ter_nombre");
             String app = request.getParameter("ter_paterno");
             String apm = request.getParameter("ter_materno");
@@ -56,46 +55,115 @@ public class RegistrarTe extends HttpServlet {
             String hsabado = request.getParameter("hsab");
             String hdomingo = request.getParameter("hdom");
             String privilegio = request.getParameter("ter_privilegio");
-            
+
             //Casting de variables para el terapeuta
-            int ter_privilegio=Integer.parseInt(privilegio);
-            
-            out.println("<title>Servlet RegistrarTe</title>");            
+            int ter_privilegio = Integer.parseInt(privilegio);
+
+            out.println("<title>Servlet RegistrarTe</title>");
+            out.println("<link href=\"css/principal.css\" rel=\"stylesheet\" type=\"text/css\"/>");
             out.println("</head>");
             out.println("<body> Estamos en el servlet RegistraTe, parametros recibidos:");
-            out.println(nombre+","
-                    +app+","
-                    +apm+","
-                    +cedula+","
-                    +nick+","
-                    +clave+","
-                    +hlunes+","
-                    +hmartes+","
-                    +hmiercoles+","
-                    +hjueves+","
-                    +hviernes+","
-                    +hsabado+","
-                    +hdomingo+","
-                    +ter_privilegio);
+            out.println(nombre + ","
+                    + app + ","
+                    + apm + ","
+                    + cedula + ","
+                    + nick + ","
+                    + clave + ","
+                    + hlunes + ","
+                    + hmartes + ","
+                    + hmiercoles + ","
+                    + hjueves + ","
+                    + hviernes + ","
+                    + hsabado + ","
+                    + hdomingo + ","
+                    + ter_privilegio);
             
-             try {
-            if(!conex.verificaExiste(nick)){
-                conex.registrarTerapeuta(nombre, app, apm, cedula, nick, clave, hlunes, hmartes, hmiercoles, hjueves, hviernes, hsabado, hdomingo, ter_privilegio);
-                System.out.println("Se ha registrado un usuario");
-                //conex.registrarTe(cedula, nick);
-                out.println("<script>alert('Se ha registrado el terapeuta')</script>");
-            }   else{ 
-                out.println("<script>alert('Ya existe un usuario registrado con el mismo nombre de usuario')</script>");
-                response.sendRedirect("admin.jsp");
-            }
-             }catch(SQLException ex){
+            out.println("<form action=\"CerrarSesion\" method=\"post\">\n" +
+"                                <input type=\"button\" value=\"Registrar Terapeuta\" onclick=\"window.location.href = 'registrarTe.jsp'\" id=\"boton\"/>\n" +
+"                                <input type=\"button\" value=\"Consultar Terapeutas\" onclick=\"location.href = 'ConsultarTerapeutas.jsp'\" id=\"boton\"/>                 \n" +
+"                                <input type=\"button\" value=\"Inicio\" onclick=\"window.location.href = 'InicioAdministrador.jsp'\" id=\"boton\"/>                               \n" +
+"                                <input type=\"submit\" value=\"Cerrar Sesion\" id=\"boton\">\n" +
+"                            </form>  ");
+            out.println("<h1>REGISTRO EXITOSO</h1>");
+            try {
+                if (!conex.verificaExiste(nick)) {
+                    conex.registrarTerapeuta(nombre, app, apm, cedula, nick, clave, hlunes, hmartes, hmiercoles, hjueves, hviernes, hsabado, hdomingo, ter_privilegio);
+                    System.out.println("Se ha registrado un usuario");
+                    //conex.registrarTe(cedula, nick);
+                    out.println("<script>alert('Se ha registrado el terapeuta')</script>");
+
+                    /**
+                     * ************************************************************************
+                     * Desplegamos la información de una consulta del terapeura
+                     * registrado 
+                ***************************************************************************
+                     */
+                    String datosTerapeuta[] = conex.consultarDatosTerapeuta(nick);
+                    out.println("<center>");
+                    out.println("<table>");
+                    out.println("<tr>");
+                    out.println("<td> Clave");
+                    out.println("</td>");
+                    out.println("<td> Terapeuta");
+                    out.println("</td>");
+                    out.println("</tr>");
+                    out.println("<tr>");
+                    out.println("<td>"+datosTerapeuta[5]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[0]+" "+datosTerapeuta[1]+" "+datosTerapeuta[2]);
+                    out.println("</td>");
+                    out.println("</tr>");
+                    out.println("</tabe>");
+                    
+                    out.println("<table>");
+                    out.println("<tr>");
+                    out.println("<td>"+datosTerapeuta[6]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[7]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[8]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[9]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[10]);
+                    out.println("</td>");
+                    out.println("<td>"+datosTerapeuta[11]);
+                    out.println("</td>");
+                    out.println("</tr>");
+                    
+                    out.println("<tr>");
+                    out.println("<td> LUNES");
+                    out.println("</td>");
+                    out.println("<td> MARTES");
+                    out.println("</td>");
+                    out.println("<td>MIERCOLES");
+                    out.println("</td>");
+                    out.println("<td>JUEVES");
+                    out.println("</td>");
+                    out.println("<td>VIERNES");
+                    out.println("</td>");
+                    out.println("<td>SABADO");
+                    out.println("</td>");
+                    out.println("</tr>");
+                    
+                    
+                    out.println("</table>");
+                    out.println("</center>");
+                    
+                    
+                    
+
+                } else {
+                    out.println("<script>alert('Ya existe un usuario registrado con el mismo nombre de usuario')</script>");
+                    response.sendRedirect("InicioAdministrador.jsp");
+                }
+            } catch (SQLException ex) {
                 //Logger.getLogger(RegistrarP.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("El error es:" + ex.getMessage());
                 out.println("El usuario no se registro");
-         }
-            
-           
-          /*
+            }
+
+            /*
             
             
                 

@@ -44,8 +44,8 @@
                         <td>
                             <form action="CerrarSesion" method="post">
                                 <input type="button" value="Registrar Terapeuta" onclick="window.location.href = 'registrarTe.jsp'" id="boton"/>
-                                <input type="button" value="Eliminar Terapeuta" onclick="window.location.href = 'eliminarTe.jsp'" id="boton"/>
-                                <input type="button" value="Consultar Terapeutas" onclick="location.href = 'ConsultarTerapeutas.jsp'" id="boton"/>
+                                <input type="button" value="Consultar Terapeutas" onclick="location.href = 'ConsultarTerapeutas.jsp'" id="boton"/>                 
+                                <input type="button" value="Inicio" onclick="window.location.href = 'InicioAdministrador.jsp'" id="boton"/>                               
                                 <input type="submit" value="Cerrar Sesion" id="boton">
                             </form>
                         </td>

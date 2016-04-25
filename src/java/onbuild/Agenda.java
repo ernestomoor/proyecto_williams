@@ -85,16 +85,13 @@ public class Agenda extends HttpServlet {
             out.println("</html>");
             
                 conex.registrarSesion(terapeuta[3], curpPaciente, fechaSesion,HoraSesion, no_sesion, observaciones);
-                System.out.println("Se ha registrado un usuario");
-                //conex.registrarTe(cedula, nick);
-                out.println("<script>alert('Se ha registrado el terapeuta')</script>");
-            
-                out.println("<script>alert('Ya existe un usuario registrado con el mismo nombre de usuario')</script>");
-                response.sendRedirect("admin.jsp");
+                System.out.println("Se ha registrado una sesion");
+        
+                response.sendRedirect("Agenda.jsp");
              }catch(SQLException ex){
                 //Logger.getLogger(RegistrarP.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("El error es:" + ex.getMessage());
-                out.println("El usuario no se registro");
+                out.println("Ocurrio una falla al intentar registrar una sesion");
          }
             
             
