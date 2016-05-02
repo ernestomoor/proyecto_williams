@@ -1,7 +1,7 @@
 <%-- 
     Document   : Expediente
-    Created on : 11-ene-2016, 21:21:03
-    Author     : Wolf
+    Created on : 27 de Abril 2016
+    Author     : Sergio
 --%>
 
 <%@page import="java.sql.ResultSet"%>
@@ -64,15 +64,6 @@
 
     <body>
 
-        <%Acceso conex = new Acceso();
-            String[] terapeuta = conex.consultarDatosTerapeuta(nom);
-
-            String nombre = terapeuta[0];
-            String paterno = terapeuta[1];
-            String materno = terapeuta[2];
-            String cedula = terapeuta[3];
-
-        %>
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -149,7 +140,7 @@
                             <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-user">
-                            <li><a href="ModificarTerapeuta.jsp?cedula=<%=cedula%>"><i class="fa fa-user fa-fw"></i>Perfil de <%=nombre%></a>
+                            <li><a href="ModificarTerapeuta.jsp"><i class="fa fa-user fa-fw"></i>Perfil de</a>
                             </li>
                             <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
                             </li>
@@ -181,31 +172,19 @@
 
 
                             <li>
-                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> MENU DEL TERAPEUTA</a>
+                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> MENU DEL ADMINISTRADOR</a>
                             </li>
 
                             <li>
-                                <a href="#"><i class="fa fa-calendar fa-fw"></i> Agenda<span class="fa arrow"></span></a>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> Terapeuta<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="Agenda.jsp">Sesiones</a>
+                                        <a href="registrarTe.jsp">Registro</a>
+                                    </li>
+                                    <li>
+                                        <a href="ConsultarTerapeutas.jsp">Consultar</a>
                                     </li>
 
-                                </ul>
-                                <!-- /.nav-second-level -->
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-user fa-fw"></i> Paciente<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="registrarPT.jsp">Registro</a>
-                                    </li>
-                                    <li>
-                                        <a href="ConsultarPaciente.jsp">Consulta</a>
-                                    </li>
-                                    <li>
-                                        <a href="ConsultarExpediente.jsp">Expedientes</a>
-                                    </li>
                                 </ul>
                             </li>
 
@@ -233,6 +212,7 @@
                  * para mostrarlo mas adelante)
                  * ********************************************************
                  */
+                Acceso conex=new Acceso();
                 String expediente[] = conex.consultarExpediente(curpPaciente);
 
                 //Asignamos lo obtenido a las variables

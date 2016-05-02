@@ -21,7 +21,7 @@
         response.sendRedirect("tutor.jsp");
 
     } else if (priv.equals("1")) {
-        response.sendRedirect("admin.jsp");
+        //response.sendRedirect("admin.jsp");
     } else if (priv.equals("2")) {
 
     } else {

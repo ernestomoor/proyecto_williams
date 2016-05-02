@@ -32,202 +32,369 @@ Author     : user
 <%--Parametros recibidos--%>
 <%    String cedula = request.getParameter("cedula");
 %>
-
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>DetallesTerapeuta</title>
-        <link href="css/principal.css" rel="stylesheet" type="text/css"/>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Proyecto Williams</title>
+        <!-- Bootstrap Core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- MetisMenu CSS -->
+        <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
     </head>
-    <body>
-    <center>
-        <header id="fondo_superior">
-            <center><img src="css/logo.png" id="logo"/></center>
+    <body>  
+        <div id="wrapper">
 
-        </header>
-        <div id="menu">
-            <center>
-                <table>
-                    <tr>
-                        <td>
-                            <form action="CerrarSesion" method="post">
-                                <input type="button" value="Registrar Terapeuta" onclick="window.location.href = 'registrarTe.jsp'" id="boton"/>
-                                <input type="button" value="Consultar Terapeutas" onclick="location.href = 'ConsultarTerapeutas.jsp'" id="boton"/>                 
-                                <input type="button" value="Inicio" onclick="window.location.href = 'InicioAdministrador.jsp'" id="boton"/>                               
-                                <input type="submit" value="Cerrar Sesion" id="boton">
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </center>
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Programa de intervención Neuropsicolígica para Personas con Sindrome de Williams</a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links navbar-right">
+
+
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-clock-o fa-fw"></i> Tienes una sesion en: 
+                                        <span class="pull-right text-muted small">4 minutos</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-clock-o fa-fw"></i> Tienes una sesion en:
+                                        <span class="pull-right text-muted small">12 minutos</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-clock-o fa-fw"></i> Tienes una sesion en
+                                        <span class="pull-right text-muted small">50 minutos</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <div>
+                                        <i class="fa fa-clock-o fa-fw"></i> Tienes sesion en
+                                        <span class="pull-right text-muted small">2 horas</span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+
+                            <li>
+                                <a class="text-center" href="#">
+                                    <strong>Ver la agenda</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-alerts -->
+                    </li>
+                    <!-- /.dropdown -->
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="ModificarTerapeuta.jsp?cedula="><i class="fa fa-user fa-fw"></i>Perfil de </a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="CerrarSesion"><i class="fa fa-sign-out fa-fw"></i>salir</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+                </ul>
+                <!-- /.navbar-top-links -->
+                <!---------------------------------------------------------------------------------------------------------------------------------------------------->
+                <!--BARRA DE NAVEGACION VERTICAL-->
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Buscar...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </li>
+
+
+                            <li>
+                                <a href="#"><i class="fa fa-dashboard fa-fw"></i> MENU DEL ADMINISTRADOR</a>
+                            </li>
+
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> Terapeuta<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="registrarTe.jsp">Registro</a>
+                                    </li>
+                                    <li>
+                                        <a href="ConsultarTerapeutas.jsp">Consultar</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+                <!-- /.navbar-static-side -->
+            </nav>
+
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br>
+                            <div class="panel panel-default">
+                                <div class="panel-heading"> Detalles del terapeuta</div>
+                                <div class="panel-body">
+                                    <div class="row">
+
+                                        <%--Consultamos la información del terapeuta--%>
+                                        <%
+                                            Acceso conex = new Acceso();
+                                            String terapeuta[] = conex.consultarTerapeutaPorCedula(cedula);
+                                        %>
+                                        <div><center>
+                                                <h2>
+                                                    <%=terapeuta[0]%>
+                                                    <%=terapeuta[1]%>
+                                                    <%=terapeuta[2]%>
+                                                </h2>
+                                                <h3>
+                                                    Cedula: <%=terapeuta[3]%>
+                                                </h3>
+                                                <table class="table">
+                                                    <thead>    
+                                                        </tr>
+                                                        <tr>
+                                                            <th>
+                                                                LUNES
+                                                            </th>
+                                                            <th>
+                                                                MARTES
+                                                            </th>
+                                                            <th>
+                                                                MIERCOLES
+                                                            </th>
+                                                            <th>
+                                                                JUEVES
+                                                            </th>
+                                                            <th>
+                                                                VIERNES
+                                                            </th>
+                                                            <th>
+                                                                SABADO
+                                                            </th>    
+                                                        <tr>
+                                                    </thead>
+                                                    <td>
+                                                        <%=terapeuta[6]%>
+                                                    </td>
+                                                    <td>
+                                                        <%=terapeuta[7]%>
+                                                    </td>
+                                                    <td>
+                                                        <%=terapeuta[8]%> 
+                                                    </td>
+                                                    <td>
+                                                        <%=terapeuta[9]%> 
+                                                    </td>
+                                                    <td>
+                                                        <%=terapeuta[10]%> 
+                                                    </td>
+                                                    <td>
+                                                        <%=terapeuta[11]%> 
+                                                    </td>     
+                                                    </tr>
+                                                </table>
+                                            </center>
+                                            </center>
+                                        </div>
+                                    </div><!--Row-->
+                                </div><!--panel body-->  
+                            </div><!--panel defaul-->
+                            
+                            <div class="panel panel-default">
+                                <div class="panel-heading"> Pacientes del terapeuta</div>
+                                <div class="panel-body">
+                                    <div class="row">
+
+                                        <table class="table">
+                                            <thead>    
+                                            <tr>
+                                                    <th>
+                                                        Nombre
+                                                    </th>
+                                                    <th>
+                                                        A.Paterno
+                                                    </th>
+                                                    <th>
+                                                        A. Materno
+                                                    </th>
+                                                    <th>
+                                                        CURP
+                                                    </th>
+                                                    
+                                                    <th>
+                                                        Edad
+                                                    </th>
+                                                    <th>
+                                                        Lateralidad
+                                                    </th>
+                                                    <th>
+                                                        Nick
+                                                    </th>
+                                                    <th>
+                                                        Clave
+                                                    </th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                                <%
+                                                    PreparedStatement ps;
+                                                    ResultSet rs;
+                                                    Acceso ac = new Acceso();
+                                                    String strSql = "select "
+                                                            + "p.* "
+                                                            + "from terapeuta_paciente tp "
+                                                            + "inner join paciente p on "
+                                                            + "tp.Curp_paciente = p.Curp_paciente "
+                                                            + "inner join terapeuta t on "
+                                                            + "tp.Cedula = t.Cedula "
+                                                            + "where t.Cedula = " + cedula + ";";
+
+                                                    ps = ac.iniCon().prepareStatement(strSql);
+                                                    rs = ps.executeQuery();
+                                                    while (rs.next()) {
+                                                %>
+                                                <tr id="tabla">
+                                                    <td>
+                                                        <% out.print(rs.getString("Nombre")); %>
+                                                    </td>
+                                                    <td>
+                                                        <% out.print(rs.getString("App")); %>
+                                                    </td>
+                                                    <td>
+                                                        <% out.print(rs.getString("Apm"));%>
+                                                    </td>
+                                                    <td>
+                                                        <a href="Expediente_1.jsp?curpPaciente=<%=rs.getString("Curp_paciente")%>"</a><%out.print(rs.getString("curp_paciente")); %>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <% out.print(rs.getString("Edad")); %>
+                                                    </td>
+                                                    <td>
+                                                        <% out.print(rs.getString("Lateralidad")); %>
+                                                    </td>
+                                                    <td>
+                                                        <% out.print(rs.getString("Nick")); %>
+                                                    </td>
+                                                    <td>
+                                                        <% out.print(rs.getString("Clave")); %>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <% }%>
+                                            </table>
+
+
+
+                                        </div>
+
+
+
+
+
+                                    </div><!--Row-->
+                                </div><!--panel body-->  
+                            </div><!--panel defaul-->
+
+
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /#page-wrapper -->
+
         </div>
-        <P>Bienvenido Administrador: <% out.println(sesion.getAttribute("usuario"));%></P>
+        <!-- /#wrapper -->
 
-        <h2>TERAPEUTA</h2>
+        <!-- jQuery -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-        <%--Consultamos la información del terapeuta--%>
-        <%
-            Acceso conex = new Acceso();
-            String terapeuta[] = conex.consultarTerapeutaPorCedula(cedula);
-        %>
-        <div><center>
-                <h2>
-                    <%=terapeuta[0]%>
-                    <%=terapeuta[1]%>
-                    <%=terapeuta[2]%>
-                </h2>
-                <h3>
-                    Cedula: <%=terapeuta[3]%>
-                </h3>
-                <table>
-                    </tr>
-                    <tr>
-                        <td>
-                            LUNES
-                        </td>
-                        <td>
-                            MARTES
-                        </td>
-                        <td>
-                            MIERCOLES
-                        </td>
-                        <td>
-                            JUEVES
-                        </td>
-                        <td>
-                            VIERNES
-                        </td>
-                        <td>
-                            SABADO
-                        </td>    
-                    <tr>
-                        <td>
-                            <%=terapeuta[6]%>
-                        </td>
-                        <td>
-                            <%=terapeuta[7]%>
-                        </td>
-                        <td>
-                            <%=terapeuta[8]%> 
-                        </td>
-                        <td>
-                            <%=terapeuta[9]%> 
-                        </td>
-                        <td>
-                            <%=terapeuta[10]%> 
-                        </td>
-                        <td>
-                            <%=terapeuta[11]%> 
-                        </td>     
-                    </tr>
-                </table>
-            </center>
-    </center>
-</div>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<div>
-    <h2>PACIENTES</h2>
-    <table>
-        <tr id="tabla">
-            <td>
-                Nombre
-            </td>
-            <td>
-                A.Paterno
-            </td>
-            <td>
-                A. Materno
-            </td>
-            <td>
-                CURP
-            </td>
-            <td>
-                F.Nacimiento
-            </td>
-            <td>
-                Escolaridad
-            </td>
-            <td>
-                Sexo
-            </td>
-            <td>
-                Edad
-            </td>
-            <td>
-                Lateralidad
-            </td>
-            <td>
-                Nick
-            </td>
-            <td>
-                Clave
-            </td>
-            <td>
-                Privilegio
-            </td>
-        </tr>
-        <%
-            PreparedStatement ps;
-            ResultSet rs;
-            Acceso ac = new Acceso();
-            String strSql ="select "+
-                    "p.* " +
-                    "from terapeuta_paciente tp " + 
-                    "inner join paciente p on " +
-                    "tp.Curp_paciente = p.Curp_paciente "+
-                    "inner join terapeuta t on " +
-                    "tp.Cedula = t.Cedula " +
-                    "where t.Cedula = "+cedula+";";
- 
-        ps = ac.iniCon().prepareStatement(strSql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-        %>
-        <tr id="tabla">
-            <td>
-                <% out.print(rs.getString("Nombre")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("App")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Apm"));%>
-            </td>
-            <td>
-                <a href="DetallesTerapeuta.jsp?curp=<%=rs.getString("Curp_paciente")%>"</a><%out.print(rs.getString("curp_paciente")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("FNac")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Escolaridad")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Sexo")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Edad")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Lateralidad")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Nick")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Clave")); %>
-            </td>
-            <td>
-                <% out.print(rs.getString("Id_priv")); %>
-            </td>
-        </tr>
-        <% }%>
-    </table>
+        <!-- Metis Menu Plugin JavaScript -->
+        <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="dist/js/sb-admin-2.js"></script>
+
+    </body>  
 
 
 
-</div>
-
-
-</body>
 </html>
+
